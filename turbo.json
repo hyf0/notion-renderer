@@ -1,0 +1,27 @@
+{
+  "baseBranch": "origin/main",
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "type-check",
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "./dist/**",
+        "./build/**"
+      ]
+    },
+    "type-check": {
+      "dependsOn": [
+        "^type-check"
+      ]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    }
+  }
+}
