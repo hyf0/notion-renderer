@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "type-check": "pnpm type-check --parallel --recursive",
     "clean:output": "pnpm run -r -p clean:output",
-    "build:next": "pnpm turbo run build --scope=next --no-deps --include-dependencies",
+    "dev:next": "pnpm turbo run dev --scope=next --no-deps --include-dependencies",
     "build:cra": "pnpm turbo run build --scope=cra --no-deps --include-dependencies",
     "clean:node_modules": "rimraf ./**/node_modules/**"
   },
