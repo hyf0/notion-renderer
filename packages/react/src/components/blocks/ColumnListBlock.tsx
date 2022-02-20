@@ -1,5 +1,5 @@
-import { FC, useContext } from 'react'
-import { TColumnBlock, TColumnListBlock } from '../..'
+import { TColumnBlock, TColumnListBlock } from '@notion-renderer/shared'
+import React, { FC, useContext } from 'react'
 import { NotionBlocks } from '../NotionBlocks'
 import { notionPageContext } from '../NotionPage'
 

@@ -1,6 +1,6 @@
-import { Client } from '@notionhq/client'
+import type { Client } from '@notionhq/client'
 
-export type TPageCover = Extract<Awaited<ReturnType<Client['pages']['retrieve']>>, { cover: any }>['cover']
+// export type TPageCover = Extract<Awaited<ReturnType<Client['pages']['retrieve']>>, { cover: any }>['cover']
 
 export type TImageBlock = Extract<Awaited<ReturnType<Client['blocks']['retrieve']>>, { type: 'image' }>
 export type TColumnListBlock = Extract<Awaited<ReturnType<Client['blocks']['retrieve']>>, { type: 'column_list' }>
@@ -15,3 +15,11 @@ export type TBlockObjectResponse = Extract<
 >
 
 export type TChildrenByBlockId = { [id: string]: TBlockObjectResponse[] }
+
+// Clinet types
+
+export type GetPageResponse = Awaited<ReturnType<Client['pages']['retrieve']>>
+
+// helper types
+
+export type TPageIcon = { type: 'emoji'; payload: string } | { type: 'image'; payload: string }

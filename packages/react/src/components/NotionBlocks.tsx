@@ -1,5 +1,6 @@
-import { FC } from 'react'
-import { ImageBlock, TBlockObjectResponse } from '..'
+import { TBlockObjectResponse } from '@notion-renderer/shared'
+import React, { FC } from 'react'
+import { ImageBlock } from '..'
 import { ColumnListBlock } from './blocks/ColumnListBlock'
 import { ParagraphBlock } from './blocks/ParagraphBlock'
 

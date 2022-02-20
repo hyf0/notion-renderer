@@ -1,45 +1,36 @@
-import { NotionPage } from '@/components/notion'
-import { PageCover } from '@/components/notion/components/blocks/PageCover'
-import config from '@/knots.config'
-import { EnhancedNotionClient } from '@/libs/enhanced-notion-client'
+import { NotionPage } from '@notion-renderer/react'
+import { EnhancedNotionClient } from '@notion-renderer/client'
 import { defineGetServerSideProps, ExtractServerSideProps } from '@/libs/typing-next'
-import { TBlockObjectResponse } from '@/types/notion'
 import { Client } from '@notionhq/client'
 import { NextPage } from 'next'
-import { createContext, FC, useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 
 const notion = new EnhancedNotionClient(
   new Client({
-    auth: config.notionToken,
+    auth: process.env.NOTION_TOKEN!,
   }),
-)
+) 
 
 export const getServerSideProps = defineGetServerSideProps(async (ctx) => {
   const pageId = ctx.params?.pageId ?? ''
-
-  const pageResp = await notion.raw.pages.retrieve({ page_id: pageId as string })
-  const rootBlocks = await notion.fetchAllBlocks(pageId as string)
-  const blockToChildren = await notion.getChildren(rootBlocks, true)
+  const page = await notion.getPage(pageId as string);
 
   return {
     props: {
-      pageResp,
-      rootBlocks,
-      blockToChildren,
+      page,
     },
   }
 })
 
 type ServerSideProps = ExtractServerSideProps<typeof getServerSideProps>
 
-const BlogPost: NextPage<ServerSideProps> = ({ pageResp, rootBlocks, blockToChildren }) => {
+const BlogPost: NextPage<ServerSideProps> = ({ page }) => {
   useEffect(() => {
-    console.log('blockToChildren', blockToChildren, 'rootBlocks', rootBlocks)
-  }, [blockToChildren])
+    console.log(page)
+  }, [page])
   return (
     <div>
-      {'cover' in pageResp && <PageCover cover={pageResp.cover} />}
-      <NotionPage blocks={rootBlocks} childrenByBlockId={blockToChildren} />
+      <NotionPage cover={page.cover} icon={page.icon} blocks={page.rootBlocks} childrenByBlockId={page.childrenByBlockId} />
     </div>
   )
 }

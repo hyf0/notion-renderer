@@ -1,5 +1,5 @@
 {
-  "name": "@notion-renderer/react",
+  "name": "@notion-renderer/shared",
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
@@ -13,22 +13,19 @@
     "./*": "./*"
   },
   "scripts": {
-    "prepublish": "pnpm type-check && pnpm build",
     "type-check": "tsc --noEmit",
+    "prepublish": "pnpm type-check && pnpm build",
     "build": "tsup src/*.ts",
     "dev": "tsup src/*.ts --watch src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "@notion-renderer/shared": "workspace:*"
-  },
-  "peerDependencies": {
-    "react": "^17.0.2 || ^18.0.0-0"
-  },
-  "devDependencies": {
-    "react": "^17.0.2"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@notionhq/client": "^0.4.13"
+  },
+  "peerDependencies": {
+    "@notionhq/client": "^0.4.13"
+  }
 }

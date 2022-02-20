@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { TImageBlock } from '../typings'
+import { TImageBlock } from '@notion-renderer/shared'
+import React, { FC } from 'react'
 
 export const ImageBlock: FC<{ info: TImageBlock }> = ({ info }) => {
   let url: string

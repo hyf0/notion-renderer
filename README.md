@@ -1,6 +1,14 @@
-# performant-monorepo-starter(WIP)
+# notion-renderer
 
-A Fast and production-ready monorepo template with native toolchain.
+Renderer for Notion
+
+# packages
+
+- @notion-renderer/react
+- @notion-renderer/vue
+- @notion-renderer/client
+- @notion-renderer/shared
+
 
 # toolchain
 

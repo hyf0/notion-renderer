@@ -1,6 +1,5 @@
-import { TChildrenByBlockId } from '@/components/notion'
-import { TBlockObjectResponse } from '@/types/notion'
-import { Client } from '@notionhq/client/build/src'
+import { GetPageResponse, TBlockObjectResponse, TChildrenByBlockId, TPageIcon } from '@notion-renderer/shared'
+import { Client } from '@notionhq/client'
 
 export class EnhancedNotionClient {
   constructor(public raw: Client) {}
@@ -50,5 +49,53 @@ export class EnhancedNotionClient {
       }
     }
     return childrenByBlockId
+  }
+
+  async getPage(pageId: string) {
+    const [rootBlocks, rawPage] = await Promise.all([
+      this.fetchAllBlocks(pageId),
+      this.raw.pages.retrieve({ page_id: pageId }),
+    ])
+    const cover = extractCoverUrl(rawPage)
+    const icon = extractIcon(rawPage)
+    const childrenByBlockId = await this.getChildren(rootBlocks, true)
+    return {
+      cover,
+      icon,
+      childrenByBlockId,
+      rawPage,
+      rootBlocks,
+    }
+  }
+}
+
+const extractCoverUrl = (page: GetPageResponse) => {
+  if ('cover' in page) {
+    if (page.cover?.type === 'external') {
+      return page.cover.external.url
+    } else if (page.cover?.type === 'file') {
+      return page.cover.file.url
+    }
+  }
+}
+
+const extractIcon = (page: GetPageResponse): TPageIcon | undefined => {
+  if ('icon' in page) {
+    if (page.icon?.type === 'emoji') {
+      return {
+        type: 'emoji',
+        payload: page.icon.emoji,
+      }
+    } else if (page.icon?.type === 'file') {
+      return {
+        type: 'image',
+        payload: page.icon.file.url,
+      }
+    } else if (page.icon?.type === 'external') {
+      return {
+        type: 'image',
+        payload: page.icon.external.url,
+      }
+    }
   }
 }

@@ -1,23 +1,44 @@
-import { createContext, FC } from 'react'
-import { ImageBlock, TBlockObjectResponse, TChildrenByBlockId } from '..'
+import { TBlockObjectResponse, TChildrenByBlockId, TPageIcon } from '@notion-renderer/shared'
+import React, { createContext, FC } from 'react'
+import { ImageBlock } from '..'
 import { ColumnListBlock } from './blocks/ColumnListBlock'
+import { PageCover } from './blocks/PageCover'
 import { ParagraphBlock } from './blocks/ParagraphBlock'
+import { PageIcon } from './PageIcon'
 
-export const notionPageContext = createContext({ childrenByBlockId: {} as { [id: string]: TBlockObjectResponse[] } })
+export const notionPageContext = createContext({
+  childrenByBlockId: {} as { [id: string]: TBlockObjectResponse[] },
+  fullWidth: false,
+})
 
-export const NotionPage: FC<{ blocks: TBlockObjectResponse[]; childrenByBlockId: TChildrenByBlockId }> = (
-  { blocks, childrenByBlockId },
+export const NotionPage: FC<
+  {
+    blocks: TBlockObjectResponse[]
+    childrenByBlockId: TChildrenByBlockId
+    fullWidth?: boolean
+    cover?: string
+    icon?: TPageIcon
+  }
+> = (
+  { blocks, childrenByBlockId, fullWidth = false, cover, icon },
 ) => {
   return (
-    <notionPageContext.Provider value={{ childrenByBlockId }}>
+    <notionPageContext.Provider value={{ childrenByBlockId, fullWidth }}>
+      {cover && <PageCover cover={cover} />}
       <div
-        className="px-8"
+        className={`px-8 flex flex-col items-center`}
         style={{
           paddingLeft: 'calc(96px + env(safe-area-inset-left))',
           paddingRight: 'calc(96px + env(safe-area-inset-right))',
         }}
       >
-        <Blocks blocks={blocks} />
+        <div className={`${fullWidth ? '' : 'w-[900px]'} relative`}>
+          {icon && <PageIcon icon={icon} />}
+          <div className="font-bold text-[40px] mt-9">
+            Next for Vercel
+          </div>
+          <Blocks blocks={blocks} />
+        </div>
       </div>
     </notionPageContext.Provider>
   )
