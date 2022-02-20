@@ -1,7 +1,6 @@
 {
   "name": "infra",
   "version": "1.0.0",
-  "description": "A Fast and production-ready monorepo template with native toolchain.",
   "private": true,
   "scripts": {
     "prepare": "husky install",
@@ -11,20 +10,13 @@
     "build:cra": "pnpm turbo run build --scope=cra --no-deps --include-dependencies",
     "clean:node_modules": "rimraf ./**/node_modules/**"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iheyunfei/performant-monorepo-starter.git"
-  },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/iheyunfei/performant-monorepo-starter/issues"
-  },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,cjs,mjs,json}": "dprint fmt"
   },
-  "homepage": "https://github.com/iheyunfei/performant-monorepo-starter#readme",
   "devDependencies": {
     "dprint": "^0.19.2",
     "husky": "^7.0.4",

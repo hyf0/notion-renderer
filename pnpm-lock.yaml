@@ -59,6 +59,7 @@ importers:
       '@notionhq/client': ^0.4.13
     dependencies:
       '@notion-renderer/shared': link:../shared
+    devDependencies:
       '@notionhq/client': 0.4.13
 
   packages/react:
