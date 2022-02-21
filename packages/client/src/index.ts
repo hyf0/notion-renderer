@@ -60,6 +60,9 @@ export class EnhancedNotionClient {
     const icon = extractIcon(rawPage)
     const childrenByBlockId = await this.getChildren(rootBlocks, true)
     return {
+      title: 'properties' in rawPage && rawPage.properties.title?.type === 'title'
+        ? rawPage.properties.title.title[0].plain_text
+        : null,
       cover,
       icon,
       childrenByBlockId,
@@ -77,9 +80,11 @@ const extractCoverUrl = (page: GetPageResponse) => {
       return page.cover.file.url
     }
   }
+
+  return null
 }
 
-const extractIcon = (page: GetPageResponse): TPageIcon | undefined => {
+const extractIcon = (page: GetPageResponse): TPageIcon | null => {
   if ('icon' in page) {
     if (page.icon?.type === 'emoji') {
       return {
@@ -98,4 +103,5 @@ const extractIcon = (page: GetPageResponse): TPageIcon | undefined => {
       }
     }
   }
+  return null
 }

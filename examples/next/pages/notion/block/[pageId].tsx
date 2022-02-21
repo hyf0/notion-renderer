@@ -2,12 +2,11 @@ import { defineGetServerSideProps, ExtractServerSideProps } from '@/libs/typing-
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
-import config from '@/knots.config'
 import { Client } from '@notionhq/client'
 
 export const getServerSideProps = defineGetServerSideProps(async (ctx) => {
   const notion = new Client({
-    auth: config.notionToken,
+    auth: process.env.NOTION_TOKEN!,
   })
   
   const pageId = ctx.params?.pageId ?? ''

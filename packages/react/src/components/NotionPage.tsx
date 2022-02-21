@@ -4,6 +4,7 @@ import { ImageBlock } from '..'
 import { ColumnListBlock } from './blocks/ColumnListBlock'
 import { PageCover } from './blocks/PageCover'
 import { ParagraphBlock } from './blocks/ParagraphBlock'
+import { QuoteBlock } from './blocks/QuoteBlock'
 import { PageIcon } from './PageIcon'
 
 export const notionPageContext = createContext({
@@ -18,9 +19,10 @@ export const NotionPage: FC<
     fullWidth?: boolean
     cover?: string
     icon?: TPageIcon
+    title?: string
   }
 > = (
-  { blocks, childrenByBlockId, fullWidth = false, cover, icon },
+  { blocks, childrenByBlockId, fullWidth = false, cover, icon, title },
 ) => {
   return (
     <notionPageContext.Provider value={{ childrenByBlockId, fullWidth }}>
@@ -32,11 +34,14 @@ export const NotionPage: FC<
           paddingRight: 'calc(96px + env(safe-area-inset-right))',
         }}
       >
-        <div className={`${fullWidth ? '' : 'w-[900px]'} relative`}>
+        <div className={`${fullWidth ? '' : 'w-[900px]'}`}>
           {icon && <PageIcon icon={icon} />}
-          <div className="font-bold text-[40px] mt-9">
-            Next for Vercel
-          </div>
+          {title && (
+            <div className="font-bold text-[40px] mt-9">
+              {title}
+            </div>
+          )}
+
           <Blocks blocks={blocks} />
         </div>
       </div>
@@ -62,6 +67,9 @@ export const Blocks: FC<
             }
             case 'paragraph': {
               return <ParagraphBlock key={block.id} block={block} />
+            }
+            case 'quote': {
+              return <QuoteBlock key={block.id} block={block} />
             }
             default: {
               return null

@@ -30,7 +30,7 @@ const BlogPost: NextPage<ServerSideProps> = ({ page }) => {
   }, [page])
   return (
     <div>
-      <NotionPage cover={page.cover} icon={page.icon} blocks={page.rootBlocks} childrenByBlockId={page.childrenByBlockId} />
+      <NotionPage cover={page.cover ?? undefined} icon={page.icon ?? undefined} blocks={page.rootBlocks} fullWidth={false} title={page.title ?? undefined} childrenByBlockId={page.childrenByBlockId} />
     </div>
   )
 }
