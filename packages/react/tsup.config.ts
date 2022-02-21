@@ -5,4 +5,5 @@ export const tsup: Options = {
   dts: true,
   splitting: true,
   clean: true,
+  external: ['react'],
 }

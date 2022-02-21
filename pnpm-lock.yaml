@@ -33,17 +33,17 @@ importers:
       eslint-config-next: 12.0.10
       next: 12.0.10
       postcss: ^8.4.6
-      react: 18.0.0-rc.0
-      react-dom: 18.0.0-rc.0
+      react: ^17.0.2
+      react-dom: ^17.0.2
       tailwindcss: ^3.0.22
     dependencies:
       '@notion-renderer/client': link:../../packages/client
       '@notion-renderer/react': link:../../packages/react
       '@notion-renderer/shared': link:../../packages/shared
       '@notionhq/client': 0.4.13
-      next: 12.0.10_757a802188413a36d4f24237d13b8e90
-      react: 18.0.0-rc.0
-      react-dom: 18.0.0-rc.0_react@18.0.0-rc.0
+      next: 12.0.10_react-dom@17.0.2+react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     devDependencies:
       '@types/node': 17.0.17
       '@types/react': 17.0.39
@@ -1175,7 +1175,7 @@ packages:
       eslint-plugin-jsx-a11y: 6.5.1_eslint@8.9.0
       eslint-plugin-react: 7.28.0_eslint@8.9.0
       eslint-plugin-react-hooks: 4.3.0_eslint@8.9.0
-      next: 12.0.10_757a802188413a36d4f24237d13b8e90
+      next: 12.0.10_react-dom@17.0.2+react@17.0.2
       typescript: 4.5.5
     transitivePeerDependencies:
       - supports-color
@@ -1943,7 +1943,7 @@ packages:
     dev: true
 
   /loose-envify/1.4.0:
-    resolution: {integrity: sha1-ce5R+nvkyuwaY4OffmgtgTLTDK8=}
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
@@ -2022,7 +2022,7 @@ packages:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
     dev: true
 
-  /next/12.0.10_757a802188413a36d4f24237d13b8e90:
+  /next/12.0.10_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-1y3PpGzpb/EZzz1jgne+JfZXKAVJUjYXwxzrADf/LWN+8yi9o79vMLXpW3mevvCHkEF2sBnIdjzNn16TJrINUw==}
     engines: {node: '>=12.22.0'}
     hasBin: true
@@ -2043,10 +2043,10 @@ packages:
       '@next/env': 12.0.10
       caniuse-lite: 1.0.30001312
       postcss: 8.4.5
-      react: 18.0.0-rc.0
-      react-dom: 18.0.0-rc.0_react@18.0.0-rc.0
-      styled-jsx: 5.0.0_react@18.0.0-rc.0
-      use-subscription: 1.5.1_react@18.0.0-rc.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      styled-jsx: 5.0.0_react@17.0.2
+      use-subscription: 1.5.1_react@17.0.2
     optionalDependencies:
       '@next/swc-android-arm64': 12.0.10
       '@next/swc-darwin-arm64': 12.0.10
@@ -2353,15 +2353,15 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /react-dom/18.0.0-rc.0_react@18.0.0-rc.0:
-    resolution: {integrity: sha512-tdD1n0svTndHBQvVAq/f2Kx7FgQ30CpSLp87/neQKAHPW5WtdgW1sBSwmFAcMQOrmstTuP0M+zRlH86f9kMX/A==}
+  /react-dom/17.0.2_react@17.0.2:
+    resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
     peerDependencies:
-      react: ^18.0.0-rc.0
+      react: 17.0.2
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-      react: 18.0.0-rc.0
-      scheduler: 0.21.0-rc.0-next-fe905f152-20220107
+      react: 17.0.2
+      scheduler: 0.20.2
     dev: false
 
   /react-is/16.13.1:
@@ -2374,15 +2374,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-    dev: true
-
-  /react/18.0.0-rc.0:
-    resolution: {integrity: sha512-PawosMBgF8k5Nlc3++ibzjFqPvo1XKv80MNtVYqz3abHHB2w3IpU65sSdSmBd2ooCwVhcp9b1vkx/twqhakNtA==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-    dev: false
 
   /readdirp/3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
@@ -2478,8 +2469,8 @@ packages:
       tslib: 2.3.1
     dev: true
 
-  /scheduler/0.21.0-rc.0-next-fe905f152-20220107:
-    resolution: {integrity: sha512-+sY0WajWdMjoxbmHM8P6P1FKGw8sSVKKG/HthqTFQFPxVGbKLmV1BiFPaVF9gOyQWqmnLYSXJMN+4Bs5ZygsTw==}
+  /scheduler/0.20.2:
+    resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
@@ -2641,7 +2632,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /styled-jsx/5.0.0_react@18.0.0-rc.0:
+  /styled-jsx/5.0.0_react@17.0.2:
     resolution: {integrity: sha512-qUqsWoBquEdERe10EW8vLp3jT25s/ssG1/qX5gZ4wu15OZpmSMFI2v+fWlRhLfykA5rFtlJ1ME8A8pm/peV4WA==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -2654,7 +2645,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
-      react: 18.0.0-rc.0
+      react: 17.0.2
     dev: false
 
   /sucrase/3.20.3:
@@ -2976,13 +2967,13 @@ packages:
       punycode: 2.1.1
     dev: true
 
-  /use-subscription/1.5.1_react@18.0.0-rc.0:
+  /use-subscription/1.5.1_react@17.0.2:
     resolution: {integrity: sha512-Xv2a1P/yReAjAbhylMfFplFKj9GssgTwN7RlcTxBujFQcloStWNDQdc4g4NRWH9xS4i/FDk04vQBptAXoF3VcA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
     dependencies:
       object-assign: 4.1.1
-      react: 18.0.0-rc.0
+      react: 17.0.2
     dev: false
 
   /util-deprecate/1.0.2:

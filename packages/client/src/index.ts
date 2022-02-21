@@ -20,7 +20,7 @@ export class EnhancedNotionClient {
     return rootBlocks
   }
 
-  async getChildren(blocks: readonly TBlockObjectResponse[], deep = false) {
+  async getChildren(blocks: readonly TBlockObjectResponse[], deep = false, includeChildPage = false) {
     const blocksToFetchChildren = [...blocks]
     const childrenByBlockId: TChildrenByBlockId = {}
     const runningPromises: Promise<void>[] = []
@@ -32,7 +32,7 @@ export class EnhancedNotionClient {
             (blocks) => {
               childrenByBlockId[block.id] = blocks
               if (deep) {
-                blocksToFetchChildren.push(...blocks)
+                blocksToFetchChildren.push(...(includeChildPage ? blocks : blocks.filter(b => b.type !== 'child_page')))
               }
               runningPromises.splice(
                 runningPromises.indexOf(fetchAllBlocksPromise),
