@@ -1,10 +1,8 @@
-import { TBlockObjectResponse, TChildrenByBlockId, TPageIcon } from '@notion-renderer/shared'
+import { TBlockObjectResponse, TChildrenByBlockId, TImageOrEmoji } from '@notion-renderer/shared'
 import React, { createContext, FC } from 'react'
 import { ImageBlock } from '..'
-import { ColumnListBlock } from './blocks/ColumnListBlock'
 import { PageCover } from './blocks/PageCover'
-import { ParagraphBlock } from './blocks/ParagraphBlock'
-import { QuoteBlock } from './blocks/QuoteBlock'
+import { NotionBlocks } from './NotionBlocks'
 import { PageIcon } from './PageIcon'
 
 export const notionPageContext = createContext({
@@ -18,12 +16,13 @@ export const NotionPage: FC<
     childrenByBlockId: TChildrenByBlockId
     fullWidth?: boolean
     cover?: string
-    icon?: TPageIcon
+    icon?: TImageOrEmoji
     title?: string
   }
 > = (
   { blocks, childrenByBlockId, fullWidth = false, cover, icon, title },
 ) => {
+  console.log('root blocks', blocks)
   return (
     <notionPageContext.Provider value={{ childrenByBlockId, fullWidth }}>
       {cover && <PageCover cover={cover} />}
@@ -37,47 +36,15 @@ export const NotionPage: FC<
         <div className={`${fullWidth ? '' : 'w-[900px]'}`}>
           {icon && <PageIcon icon={icon} />}
           {title && (
-            <div className="font-bold text-[40px] mt-9">
+            <div className="font-bold text-[40px] mt-9 h-[54px] py-[3px] px-[2px]">
               {title}
             </div>
           )}
-
-          <Blocks blocks={blocks} />
+          <div className="pt-[5px]">
+            <NotionBlocks blocks={blocks} />
+          </div>
         </div>
       </div>
     </notionPageContext.Provider>
   )
-}
-
-export const Blocks: FC<
-  { blocks: TBlockObjectResponse[] }
-> = (
-  { blocks },
-) => {
-  const rendererBlocks = blocks.map(block => {
-    return (
-      <div key={block.id} className=" mt-4">
-        {function() {
-          switch (block.type) {
-            case 'image': {
-              return <ImageBlock key={block.id} info={block} />
-            }
-            case 'column_list': {
-              return <ColumnListBlock key={block.id} block={block} />
-            }
-            case 'paragraph': {
-              return <ParagraphBlock key={block.id} block={block} />
-            }
-            case 'quote': {
-              return <QuoteBlock key={block.id} block={block} />
-            }
-            default: {
-              return null
-            }
-          }
-        }()}
-      </div>
-    )
-  })
-  return <>{rendererBlocks}</>
 }

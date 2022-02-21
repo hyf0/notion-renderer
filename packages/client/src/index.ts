@@ -1,4 +1,10 @@
-import { GetPageResponse, TBlockObjectResponse, TChildrenByBlockId, TPageIcon } from '@notion-renderer/shared'
+import {
+  extractNotionIcon,
+  GetPageResponse,
+  TBlockObjectResponse,
+  TChildrenByBlockId,
+  TImageOrEmoji,
+} from '@notion-renderer/shared'
 import { Client } from '@notionhq/client'
 
 export class EnhancedNotionClient {
@@ -20,7 +26,11 @@ export class EnhancedNotionClient {
     return rootBlocks
   }
 
-  async getChildren(blocks: readonly TBlockObjectResponse[], deep = false, includeChildPage = false) {
+  async getChildren(
+    blocks: readonly TBlockObjectResponse[],
+    deep = false,
+    includeChildPage = false,
+  ) {
     const blocksToFetchChildren = [...blocks]
     const childrenByBlockId: TChildrenByBlockId = {}
     const runningPromises: Promise<void>[] = []
@@ -32,7 +42,11 @@ export class EnhancedNotionClient {
             (blocks) => {
               childrenByBlockId[block.id] = blocks
               if (deep) {
-                blocksToFetchChildren.push(...(includeChildPage ? blocks : blocks.filter(b => b.type !== 'child_page')))
+                blocksToFetchChildren.push(
+                  ...(includeChildPage
+                    ? blocks
+                    : blocks.filter((b) => b.type !== 'child_page')),
+                )
               }
               runningPromises.splice(
                 runningPromises.indexOf(fetchAllBlocksPromise),
@@ -84,24 +98,9 @@ const extractCoverUrl = (page: GetPageResponse) => {
   return null
 }
 
-const extractIcon = (page: GetPageResponse): TPageIcon | null => {
+const extractIcon = (page: GetPageResponse): TImageOrEmoji | null => {
   if ('icon' in page) {
-    if (page.icon?.type === 'emoji') {
-      return {
-        type: 'emoji',
-        payload: page.icon.emoji,
-      }
-    } else if (page.icon?.type === 'file') {
-      return {
-        type: 'image',
-        payload: page.icon.file.url,
-      }
-    } else if (page.icon?.type === 'external') {
-      return {
-        type: 'image',
-        payload: page.icon.external.url,
-      }
-    }
+    return extractNotionIcon(page.icon)
   }
   return null
 }

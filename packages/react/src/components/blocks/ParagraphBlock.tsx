@@ -6,7 +6,7 @@ export const ParagraphBlock: FC<{ block: TParagraphBlock }> = ({ block }) => {
   // const blockContext = useCo
   // eslint-disable-next-line @next/next/no-img-element
   return (
-    <div>
+    <div className="py-[3px] px-[2px] my-[1px]">
       <RichTexts texts={block.paragraph.text} />
     </div>
   )
