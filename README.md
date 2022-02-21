@@ -1,6 +1,6 @@
 # notion-renderer
 
-Renderer for
+Renderer for notion
 
 # Features
 
