@@ -2,6 +2,7 @@ import { extractNotionIcon, TBlockObjectResponse } from '@notion-renderer/shared
 import React, { FC } from 'react'
 import { ImageBlock } from '..'
 import { CalloutBlock } from './blocks/CalloutBlock'
+import { CodeBlock } from './blocks/CodeBlock'
 import { ColumnListBlock } from './blocks/ColumnListBlock'
 import { HeadingBlock } from './blocks/HeadingBlock'
 import { ParagraphBlock } from './blocks/ParagraphBlock'
@@ -10,16 +11,13 @@ import { ToggleBlock } from './blocks/ToggleBlock'
 import { DefaultChildPageIcon } from './icon/DefaultChildPageIcon'
 import { RichTexts } from './RichTexts'
 
-export const NotionBlocks: FC<
-  { blocks: TBlockObjectResponse[] }
-> = (
-  { blocks },
-) => {
-  console.log('blocks', blocks)
-  const rendererBlocks = blocks.map(block => {
+export const NotionBlocks: FC<{ blocks: TBlockObjectResponse[] }> = ({
+  blocks,
+}) => {
+  const rendererBlocks = blocks.map((block) => {
     return (
       <div key={block.id} className="">
-        {function() {
+        {(function() {
           // console.log('render', block)
           switch (block.type) {
             case 'image': {
@@ -62,11 +60,23 @@ export const NotionBlocks: FC<
             case 'toggle': {
               return <ToggleBlock key={block.id} block={block} />
             }
+            case 'bookmark': {
+              return (
+                <a href={block.bookmark.url} target="_blank">
+                  <div className=" rounded-[3px] border p-[8px] hover:bg-slate-700/[.08] active:bg-slate-700/[.16]">
+                    {block.bookmark.url}
+                  </div>
+                </a>
+              )
+            }
+            case 'code': {
+              return <CodeBlock language={block.code.language} code={block.code.text[0].plain_text} />
+            }
             default: {
               return null
             }
           }
-        }()}
+        })()}
       </div>
     )
   })
