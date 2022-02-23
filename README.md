@@ -16,7 +16,7 @@ Renderer for notion
 | ------------------------ | --------- | ---------------------- |
 | Page                     | ❌        | `page`                 |
 | Text                     | ⚠️        | `text`                 |
-| Bookmark                 | ❌        | `bookmark`             |
+| Bookmark                 | ⚠️        | `bookmark`             |
 | Bulleted List            | ❌        | `bulleted_list`        |
 | Numbered List            | ❌        | `numbered_list`        |
 | Heading 1                | ✅        | `header`               |
@@ -45,7 +45,7 @@ Renderer for notion
 | Link                     | ⚠️        | `text`                 |
 | Page Link                | ⚠️        | `page`                 |
 | External Page Link       | ⚠️        | `text`                 |
-| Code (block)             | ❌        | `code`                 |
+| Code (block)             | ⚠️        | `code`                 |
 | Code (inline)            | ✅        | `text`                 |
 | Collections              | ❌        |                        |
 | Collection View          | ❌        | `collection_view`      |

@@ -1,7 +1,7 @@
-import { TPageIcon } from '@notion-renderer/shared'
+import { TImageOrEmoji } from '@notion-renderer/shared'
 import React, { FC } from 'react'
 
-export const PageIcon: FC<{ icon: TPageIcon }> = ({ icon }) => {
+export const PageIcon: FC<{ icon: TImageOrEmoji }> = ({ icon }) => {
   let iconElm: any
   if (icon.type === 'emoji') {
     iconElm = <span className=" text-[78px]">{icon.payload}</span>

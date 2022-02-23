@@ -1,6 +1,6 @@
 import { extractNotionIcon, TBlockObjectResponse } from '@notion-renderer/shared'
-import React, { FC } from 'react'
-import { ImageBlock } from '..'
+import React, { FC, useContext } from 'react'
+import { ImageBlock, notionPageContext } from '..'
 import { CalloutBlock } from './blocks/CalloutBlock'
 import { CodeBlock } from './blocks/CodeBlock'
 import { ColumnListBlock } from './blocks/ColumnListBlock'
@@ -15,6 +15,7 @@ export const NotionBlocks: FC<{ blocks: TBlockObjectResponse[] }> = ({
   blocks,
 }) => {
   const rendererBlocks = blocks.map((block) => {
+    const { childrenByBlockId } = useContext(notionPageContext)
     return (
       <div key={block.id} className="">
         {(function() {
@@ -69,8 +70,9 @@ export const NotionBlocks: FC<{ blocks: TBlockObjectResponse[] }> = ({
                 </a>
               )
             }
-            case 'code': {
-              return <CodeBlock language={block.code.language} code={block.code.text[0].plain_text} />
+            case 'synced_block': {
+              const children = childrenByBlockId[block.id]
+              return <NotionBlocks blocks={children ?? []} />
             }
             default: {
               return null
