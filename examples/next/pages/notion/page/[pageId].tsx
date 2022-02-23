@@ -1,34 +1,37 @@
-import { defineGetServerSideProps, ExtractServerSideProps } from '@/libs/typing-next'
-import { EnhancedNotionClient } from '@notion-renderer/client'
-import { NotionPage } from '@notion-renderer/react'
+import {
+  defGetServerSideProps,
+  ExtractServerSideProps,
+} from "@/libs/typing-next";
+import { EnhancedNotionClient } from "@notion-renderer/client";
+import { NotionPage } from "@notion-renderer/react";
 // import { NotionPage } from '@/components/components/NotionPage'
-import { Client } from '@notionhq/client'
-import { NextPage } from 'next'
-import { useEffect } from 'react'
+import { Client } from "@notionhq/client";
+import { NextPage } from "next";
+import { useEffect } from "react";
 
 const notion = new EnhancedNotionClient(
   new Client({
     auth: process.env.NOTION_TOKEN!,
-  }),
-)
+  })
+);
 
-export const getServerSideProps = defineGetServerSideProps(async (ctx) => {
-  const pageId = ctx.params?.pageId ?? ''
-  const page = await notion.getPage(pageId as string)
+export const { getServerSideProps } = defGetServerSideProps()(async (ctx) => {
+  const pageId = ctx.params?.pageId ?? "";
+  const page = await notion.getPage(pageId as string);
 
   return {
     props: {
       page,
     },
-  }
-})
+  };
+});
 
-type ServerSideProps = ExtractServerSideProps<typeof getServerSideProps>
+type ServerSideProps = ExtractServerSideProps<typeof getServerSideProps>;
 
 const BlogPost: NextPage<ServerSideProps> = ({ page }) => {
   useEffect(() => {
-    console.log(page)
-  }, [page])
+    console.log(page);
+  }, [page]);
   return (
     <div>
       <NotionPage
@@ -40,7 +43,7 @@ const BlogPost: NextPage<ServerSideProps> = ({ page }) => {
         childrenByBlockId={page.childrenByBlockId}
       />
     </div>
-  )
-}
+  );
+};
 
-export default BlogPost
+export default BlogPost;
