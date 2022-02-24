@@ -1,8 +1,8 @@
 import {
+  BlockObjectResponse,
+  ChildrenByBlockId,
   extractNotionIcon,
   GetPageResponse,
-  TBlockObjectResponse,
-  TChildrenByBlockId,
   TImageOrEmoji,
 } from '@notion-renderer/shared'
 import { Client } from '@notionhq/client'
@@ -14,25 +14,25 @@ export class EnhancedNotionClient {
       block_id: blockId as string,
       page_size: 100,
     })
-    const rootBlocks = rootBlocksResp.results as TBlockObjectResponse[]
+    const rootBlocks = rootBlocksResp.results as BlockObjectResponse[]
     while (rootBlocksResp.has_more) {
       rootBlocksResp = await this.raw.blocks.children.list({
         block_id: blockId as string,
         page_size: 100,
         start_cursor: rootBlocksResp.next_cursor!,
       })
-      rootBlocks.push(...(rootBlocksResp.results as TBlockObjectResponse[]))
+      rootBlocks.push(...(rootBlocksResp.results as BlockObjectResponse[]))
     }
     return rootBlocks
   }
 
   async getChildren(
-    blocks: readonly TBlockObjectResponse[],
+    blocks: readonly BlockObjectResponse[],
     deep = false,
     includeChildPage = false,
   ) {
     const blocksToFetchChildren = [...blocks]
-    const childrenByBlockId: TChildrenByBlockId = {}
+    const childrenByBlockId: ChildrenByBlockId = {}
     const runningPromises: Promise<void>[] = []
     while (blocksToFetchChildren.length > 0 || runningPromises.length > 0) {
       while (blocksToFetchChildren.length > 0) {

@@ -2,11 +2,7 @@ import { RichTextItem } from '@notion-renderer/shared'
 import React, { FC } from 'react'
 
 export const RichTexts: FC<{ texts: RichTextItem[] }> = ({ texts }) => {
-  return (
-    <>
-      {texts.map((text, idx) => <RichText key={idx} text={text} />)}
-    </>
-  )
+  return <div className="whitespace-pre-wrap">{texts.map((text, idx) => <RichText key={idx} text={text} />)}</div>
 }
 
 const RichText: FC<{ text: RichTextItem }> = ({ text }) => {
@@ -22,15 +18,21 @@ const RichText: FC<{ text: RichTextItem }> = ({ text }) => {
           anno.bold && 'font-bold',
           anno.italic && 'italic',
           anno.underline && 'underline',
-          anno.code && 'text-[#EB5757] bg-[rgba(135,131,120,0.15)] rounded-[3px] text-sm py-0.5 px-1',
+          anno.code
+          && 'text-[#EB5757] bg-[rgba(135,131,120,0.15)] rounded-[3px] text-sm py-0.5 px-1',
         ]
-          .filter(Boolean).join(' ')}
+          .filter(Boolean)
+          .join(' ')}
       >
         {text.text.content}
       </span>
     )
     if (text.text.link) {
-      return <a target="_blank" href={text.text.link.url}>{textEl}</a>
+      return (
+        <a target="_blank" href={text.text.link.url}>
+          {textEl}
+        </a>
+      )
     } else {
       return textEl
     }

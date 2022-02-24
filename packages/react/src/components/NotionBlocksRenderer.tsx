@@ -3,6 +3,7 @@ import React, { createContext, FC, Fragment, useContext } from 'react'
 import { CustomableComponents } from '../types'
 import { DefaultChildPageIcon } from './icon/DefaultChildPageIcon'
 import * as plainBlocks from './plain-blocks'
+import { RichTexts } from './RichTexts'
 
 const createDefaultRendererContextValue = () => {
   const components: CustomableComponents = {
@@ -63,7 +64,7 @@ const BlocksRenderer: FC<{ blocks: BlockObjectResponse[] }> = ({ blocks }) => {
         }
         case 'callout': {
           return (
-            <div className="mb-[8px]">
+            <div className="my-[4px]">
               <components.CalloutBlock key={block.id} block={block} />
             </div>
           )
@@ -88,7 +89,11 @@ const BlocksRenderer: FC<{ blocks: BlockObjectResponse[] }> = ({ blocks }) => {
           )
         }
         case 'divider': {
-          return <div className="border-b botder-b-[rgba(55, 53, 47, 0.09)]"></div>
+          return (
+            <div className="h-[13px] flex items-center">
+              <div className="h-[1px] w-full border-b botder-[rgba(55, 53, 47, 0.09)]" />
+            </div>
+          )
         }
         case 'toggle': {
           return <components.ToggleBlock key={block.id} block={block} />
@@ -100,6 +105,13 @@ const BlocksRenderer: FC<{ blocks: BlockObjectResponse[] }> = ({ blocks }) => {
                 {block.bookmark.url}
               </div>
             </a>
+          )
+        }
+        case 'bulleted_list_item': {
+          return (
+            <div>
+              <RichTexts texts={block.bulleted_list_item.text} />
+            </div>
           )
         }
         case 'synced_block': {

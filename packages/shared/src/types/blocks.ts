@@ -44,6 +44,12 @@ export type ToggleBlock = Extract<
   Awaited<ReturnType<Client['blocks']['retrieve']>>,
   { type: 'toggle' }
 >
+
+export type BulletedListItemBlock = Extract<
+  Awaited<ReturnType<Client['blocks']['retrieve']>>,
+  { type: 'bulleted_list_item' }
+>
+
 export type HeadingBlock =
   | HeadingBlockLevel1
   | HeadingBlockLevel2
