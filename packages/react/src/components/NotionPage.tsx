@@ -1,8 +1,7 @@
-import { TBlockObjectResponse, TChildrenByBlockId, TImageOrEmoji } from '@notion-renderer/shared'
+import { BlockObjectResponse as TBlockObjectResponse, ChildrenByBlockId, TImageOrEmoji } from '@notion-renderer/shared'
 import React, { createContext, FC } from 'react'
-import { ImageBlock } from '..'
 import { PageCover } from './blocks/PageCover'
-import { NotionBlocks } from './NotionBlocks'
+import { NotionBlocksRenderer } from './NotionBlocksRenderer'
 import { PageIcon } from './PageIcon'
 
 export const notionPageContext = createContext({
@@ -13,7 +12,7 @@ export const notionPageContext = createContext({
 export const NotionPage: FC<
   {
     blocks: TBlockObjectResponse[]
-    childrenByBlockId: TChildrenByBlockId
+    childrenByBlockId: ChildrenByBlockId
     fullWidth?: boolean
     cover?: string
     icon?: TImageOrEmoji
@@ -24,7 +23,7 @@ export const NotionPage: FC<
 ) => {
   console.log('root blocks', blocks)
   return (
-    <notionPageContext.Provider value={{ childrenByBlockId, fullWidth }}>
+    <>
       {cover && <PageCover cover={cover} />}
       <div
         className={`px-8 flex flex-col items-center`}
@@ -41,10 +40,10 @@ export const NotionPage: FC<
             </div>
           )}
           <div className="pt-[5px]">
-            <NotionBlocks blocks={blocks} />
+            <NotionBlocksRenderer blocks={blocks} childrenByBlockId={childrenByBlockId} />
           </div>
         </div>
       </div>
-    </notionPageContext.Provider>
+    </>
   )
 }

@@ -1,14 +1,19 @@
 import type { Client } from '@notionhq/client'
-import { TCalloutBlock, TParagraphBlock } from './blocks'
+import * as blockTypes from './blocks'
+export { blockTypes }
 
-export type TRichTextItem = TParagraphBlock['paragraph']['text'][number]
-export type TNotionIcon = TCalloutBlock['callout']['icon']
+export type RichTextItem = blockTypes.ParagraphBlock['paragraph']['text'][number]
+export type TNotionIcon = blockTypes.CalloutBlock['callout']['icon']
 
-export type TBlockObjectResponse = Extract<
+export type BlockObjectResponse = Extract<
   Awaited<ReturnType<Client['blocks']['children']['list']>>['results'][number],
   { type: any }
 >
 
-export type TChildrenByBlockId = { [id: string]: TBlockObjectResponse[] }
+export type ChildrenByBlockId = { [id: string]: BlockObjectResponse[] }
 
-export type TImageOrEmoji = { type: 'emoji'; payload: string } | { type: 'image'; payload: string }
+export type TImageOrEmoji =
+  | { type: 'emoji'; payload: string }
+  | { type: 'image'; payload: string }
+
+export type GetPageResponse = Awaited<ReturnType<Client['pages']['retrieve']>>

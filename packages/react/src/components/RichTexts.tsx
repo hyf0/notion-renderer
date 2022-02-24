@@ -1,7 +1,7 @@
-import { TPageIcon, TRichTextItem } from '@notion-renderer/shared'
+import { RichTextItem } from '@notion-renderer/shared'
 import React, { FC } from 'react'
 
-export const RichTexts: FC<{ texts: TRichTextItem[] }> = ({ texts }) => {
+export const RichTexts: FC<{ texts: RichTextItem[] }> = ({ texts }) => {
   return (
     <>
       {texts.map((text, idx) => <RichText key={idx} text={text} />)}
@@ -9,7 +9,7 @@ export const RichTexts: FC<{ texts: TRichTextItem[] }> = ({ texts }) => {
   )
 }
 
-const RichText: FC<{ text: TRichTextItem }> = ({ text }) => {
+const RichText: FC<{ text: RichTextItem }> = ({ text }) => {
   const colorCls = extractTextColor(text)
   const linkCls = extractLinkCls(text)
   if (text.type === 'text') {
@@ -38,14 +38,14 @@ const RichText: FC<{ text: TRichTextItem }> = ({ text }) => {
   return null
 }
 
-const extractLinkCls = (text: TRichTextItem) => {
+const extractLinkCls = (text: RichTextItem) => {
   if (text.type === 'text' && text.text.link != null) {
     return 'cursor-pointer underline opacity-70'
   }
   return ''
 }
 
-const extractTextColor = (text: TRichTextItem) => {
+const extractTextColor = (text: RichTextItem) => {
   const color = text.annotations.color
 
   const cls = color === 'default'

@@ -1,6 +1,5 @@
-export * from './types/api'
-export * from './types/blocks'
 export * from './types/notion'
+export * as notion from './types/notion'
 import { TImageOrEmoji, TNotionIcon } from './types/notion'
 
 export const extractNotionIcon = (icon: TNotionIcon): TImageOrEmoji | null => {
