@@ -1,4 +1,4 @@
-import { blockTypes } from '@notion-renderer/shared'
+import { blocks as blockTypes } from '@notion-renderer/shared'
 import { ComponentProps, FC } from 'react'
 
 export type CalloutBlock = FC<{ block: blockTypes.CalloutBlock }>

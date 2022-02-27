@@ -25,10 +25,13 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@notion-renderer/shared": "workspace:*"
+    "@notion-renderer/shared": "workspace:*",
+    "lodash-es": "^4.17.21",
+    "p-limit": "^4.0.0"
   },
   "devDependencies": {
-    "@notionhq/client": "^0.4.13"
+    "@notionhq/client": "^0.4.13",
+    "@types/lodash-es": "^4.17.6"
   },
   "peerDependencies": {
     "@notionhq/client": "^0.4.13"

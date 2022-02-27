@@ -1,13 +1,13 @@
-import { blockTypes } from '@notion-renderer/shared'
+import type { blocks } from '@notion-renderer/shared'
 import React, { useContext } from 'react'
 import { components } from '../../types'
 import { rendererContext } from '../NotionBlocksRenderer'
-
 export const ColumnListBlock: components.ColumnListBlock = ({ block }) => {
   const { BlocksRenderer, childrenByBlockId } = useContext(rendererContext)
   const childrenBlock = childrenByBlockId[
     block.id
-  ]! as blockTypes.ColumnBlock[]
+  ]! as blocks.ColumnBlock[]
+
   return (
     <div className="flex">
       {childrenBlock.map((block) => {

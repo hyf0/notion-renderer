@@ -1,8 +1,9 @@
-export * from './types/notion'
-export * as notion from './types/notion'
-import { TImageOrEmoji, TNotionIcon } from './types/notion'
+export * from './notion-types/mod'
+export * as notionTypes from './notion-types/mod'
 
-export const extractNotionIcon = (icon: TNotionIcon): TImageOrEmoji | null => {
+import { ImageOrEmoji, NotionIcon } from './notion-types/mod'
+
+export const extractNotionIcon = (icon: NotionIcon): ImageOrEmoji | null => {
   if (icon?.type === 'emoji') {
     return {
       type: 'emoji',

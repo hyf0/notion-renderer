@@ -54,3 +54,5 @@ export type HeadingBlock =
   | HeadingBlockLevel1
   | HeadingBlockLevel2
   | HeadingBlockLevel3
+
+export const foo = 'foo'

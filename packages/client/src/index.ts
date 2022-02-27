@@ -1,26 +1,34 @@
 import {
   BlockObjectResponse,
+  blocks,
   ChildrenByBlockId,
   extractNotionIcon,
   GetPageResponse,
-  TImageOrEmoji,
+  ImageOrEmoji as TImageOrEmoji,
 } from '@notion-renderer/shared'
 import { Client } from '@notionhq/client'
+import _ from 'lodash-es'
+import pLimit from 'p-limit'
 
 export class EnhancedNotionClient {
+  limit = pLimit(1000)
   constructor(public raw: Client) {}
   async fetchAllBlocks(blockId: string) {
-    let rootBlocksResp = await this.raw.blocks.children.list({
-      block_id: blockId as string,
-      page_size: 100,
-    })
-    const rootBlocks = rootBlocksResp.results as BlockObjectResponse[]
-    while (rootBlocksResp.has_more) {
-      rootBlocksResp = await this.raw.blocks.children.list({
+    let rootBlocksResp = await this.limit(() =>
+      this.raw.blocks.children.list({
         block_id: blockId as string,
         page_size: 100,
-        start_cursor: rootBlocksResp.next_cursor!,
       })
+    )
+    const rootBlocks = rootBlocksResp.results as BlockObjectResponse[]
+    while (rootBlocksResp.has_more) {
+      rootBlocksResp = await this.limit(() =>
+        this.raw.blocks.children.list({
+          block_id: blockId as string,
+          page_size: 100,
+          start_cursor: rootBlocksResp.next_cursor!,
+        })
+      )
       rootBlocks.push(...(rootBlocksResp.results as BlockObjectResponse[]))
     }
     return rootBlocks
@@ -83,6 +91,22 @@ export class EnhancedNotionClient {
       rawPage,
       rootBlocks,
     }
+  }
+
+  async getAllPageBlocks(pageId: string): Promise<blocks.ChildPageBlock[]> {
+    const rootBlock = (await this.raw.blocks.retrieve({
+      block_id: pageId,
+    })) as BlockObjectResponse
+
+    const childrenByBlockId = await this.getChildren([rootBlock], true, true)
+    const childPageBlocks = _.uniqBy(
+      Object.values(childrenByBlockId)
+        .flat()
+        .concat(rootBlock)
+        .filter((b): b is blocks.ChildPageBlock => b.type === 'child_page'),
+      (b) => b.id,
+    )
+    return childPageBlocks
   }
 }
 
