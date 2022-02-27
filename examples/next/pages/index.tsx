@@ -4,10 +4,10 @@ import {
   ExtractServerSideProps,
   ExtractStaticProps,
 } from '@/libs/typing-next'
-import type { GetStaticProps, NextPage } from 'next'
+import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     redirect: {
       destination: `${process.env.NOTION_PAGE_ID}`,
