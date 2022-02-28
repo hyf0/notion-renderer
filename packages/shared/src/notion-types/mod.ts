@@ -3,7 +3,7 @@ import * as blocks from './blocks'
 // export * from './blocks'
 export { blocks }
 
-export type RichTextItem = blocks.ParagraphBlock['paragraph']['text'][number]
+export type RichTextItem = blocks.ParagraphBlock['paragraph']['rich_text'][number]
 export type NotionIcon = blocks.CalloutBlock['callout']['icon']
 
 export type BlockObjectResponse = Extract<
