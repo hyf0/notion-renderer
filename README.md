@@ -2,7 +2,7 @@
 
 Renderer for notion using Official Notion API.
 
-[Vercel Preview](https://notion-renderer-example.vercel.app)
+[Vercel Preview](http://notion-renderer.ihyf.me/)
 
 # Features
 
