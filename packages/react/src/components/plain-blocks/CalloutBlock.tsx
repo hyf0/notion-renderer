@@ -16,7 +16,7 @@ export const CalloutBlock: components.CalloutBlock = ({ block }) => {
   return (
     <div className="flex px-[12px] py-[16px] rounded-[3px] bg-[#f1f1ef] overflow-auto">
       <div className="self-start h-[24px] w-[24px] flex justify-center items-center mr-[8px]">{iconElm}</div>
-      <div>{<RichTexts texts={block.callout.text} />}</div>
+      <div>{<RichTexts texts={block.callout.rich_text} />}</div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { TImageOrEmoji } from '@notion-renderer/shared'
+import { ImageOrEmoji as TImageOrEmoji } from '@notion-renderer/shared'
 import React, { FC } from 'react'
 
 export const PageIcon: FC<{ icon: TImageOrEmoji }> = ({ icon }) => {

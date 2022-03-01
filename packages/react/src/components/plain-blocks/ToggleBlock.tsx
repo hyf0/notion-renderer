@@ -22,7 +22,7 @@ export const ToggleBlock: components.ToggleBlock = ({ block }) => {
         </div>
       </div>
       <div>
-        <RichTexts texts={block.toggle.text} />
+        <RichTexts texts={block.toggle.rich_text} />
         {isExpanded && <BlocksRenderer blocks={children} />}
       </div>
     </div>

@@ -110,7 +110,7 @@ const BlocksRenderer: FC<{ blocks: BlockObjectResponse[] }> = ({ blocks }) => {
         case 'bulleted_list_item': {
           return (
             <div>
-              <RichTexts texts={block.bulleted_list_item.text} />
+              <RichTexts texts={block.bulleted_list_item.rich_text} />
             </div>
           )
         }
