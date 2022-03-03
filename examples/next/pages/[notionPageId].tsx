@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 
 const notion = new EnhancedNotionClient(
   new Client({
-    notionVersion: '2022-02-22',
     auth: process.env.NOTION_TOKEN!,
   }),
 )

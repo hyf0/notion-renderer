@@ -30,11 +30,11 @@
     "p-limit": "^4.0.0"
   },
   "devDependencies": {
-    "@notionhq/client": "^1.0.0",
+    "@notionhq/client": "1.0.1",
     "@types/lodash-es": "^4.17.6"
   },
   "peerDependencies": {
-    "@notionhq/client": "^1.0.0"
+    "@notionhq/client": "1.0.1"
   },
   "license": "ISC"
 }

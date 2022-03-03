@@ -27,9 +27,9 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "@notionhq/client": "^1.0.0"
+    "@notionhq/client": "1.0.1"
   },
   "devDependencies": {
-    "@notionhq/client": "^1.0.0"
+    "@notionhq/client": "1.0.1"
   }
 }

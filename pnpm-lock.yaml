@@ -25,7 +25,7 @@ importers:
       '@notion-renderer/client': workspace:*
       '@notion-renderer/react': workspace:*
       '@notion-renderer/shared': workspace:*
-      '@notionhq/client': ^1.0.0
+      '@notionhq/client': 1.0.1
       '@types/node': 17.0.17
       '@types/react': 17.0.39
       autoprefixer: ^10.4.2
@@ -41,7 +41,7 @@ importers:
       '@notion-renderer/client': link:../../packages/client
       '@notion-renderer/react': link:../../packages/react
       '@notion-renderer/shared': link:../../packages/shared
-      '@notionhq/client': 1.0.0
+      '@notionhq/client': 1.0.1
       next: 12.1.0_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -58,7 +58,7 @@ importers:
   packages/client:
     specifiers:
       '@notion-renderer/shared': workspace:*
-      '@notionhq/client': ^1.0.0
+      '@notionhq/client': 1.0.1
       '@types/lodash-es': ^4.17.6
       lodash-es: ^4.17.21
       p-limit: ^4.0.0
@@ -67,7 +67,7 @@ importers:
       lodash-es: 4.17.21
       p-limit: 4.0.0
     devDependencies:
-      '@notionhq/client': 1.0.0
+      '@notionhq/client': 1.0.1
       '@types/lodash-es': 4.17.6
 
   packages/react:
@@ -85,9 +85,9 @@ importers:
 
   packages/shared:
     specifiers:
-      '@notionhq/client': ^1.0.0
+      '@notionhq/client': 1.0.1
     devDependencies:
-      '@notionhq/client': 1.0.0
+      '@notionhq/client': 1.0.1
 
 packages:
 
@@ -288,8 +288,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@notionhq/client/1.0.0:
-    resolution: {integrity: sha512-f0vs/zj+nwpuoFqhgZn9fHGpcUsaz6UIlzIyYhVuH1oCJG3RkfGEeYOZFEESMOsSz1oi5JkFKCOGkF+K69ystA==}
+  /@notionhq/client/1.0.1:
+    resolution: {integrity: sha512-RSavJQjZsqYyu4sd5PwBq39AHOqCTCzXZcS9dFwE0u1DEMjlYhvisYN3qgVtELZdNjSdTHsvC4mapB6vO8WCpQ==}
     engines: {node: '>=12'}
     dependencies:
       '@types/node-fetch': 2.6.1
