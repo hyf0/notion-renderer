@@ -43,7 +43,7 @@ export const NotionPage: FC<
               {title}
             </div>
           )}
-          <div className="pt-[5px]">
+          <div className="pt-[5px] pb-[20px]">
             <NotionBlocksRenderer blocks={blocks} childrenByBlockId={childrenByBlockId} />
           </div>
         </div>

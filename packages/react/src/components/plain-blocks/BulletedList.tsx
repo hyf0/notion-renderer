@@ -11,7 +11,7 @@ export const BulletedList: FC<{ items: blockTypes.BulletedListItemBlock[] }> = (
         const children = childrenByBlockId[block.id]
         return (
           <React.Fragment key={block.id}>
-            <li className="my-[3px] mx-[2px] h-[24px]">
+            <li className="my-[3px] mx-[2px] leading-[24px]">
               <RichTexts texts={block.bulleted_list_item.rich_text} />
             </li>
             {children && <BlocksRenderer blocks={children} />}
