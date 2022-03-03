@@ -50,6 +50,16 @@ export type BulletedListItemBlock = Extract<
   { type: 'bulleted_list_item' }
 >
 
+export type NumberedListItemBlock = Extract<
+  Awaited<ReturnType<Client['blocks']['retrieve']>>,
+  { type: 'numbered_list_item' }
+>
+
+export type Block = Extract<
+  Awaited<ReturnType<Client['blocks']['retrieve']>>,
+  { type: any }
+>
+
 export type HeadingBlock =
   | HeadingBlockLevel1
   | HeadingBlockLevel2

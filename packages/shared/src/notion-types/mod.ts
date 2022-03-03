@@ -6,6 +6,7 @@ export { blocks }
 export type RichTextItem = blocks.ParagraphBlock['paragraph']['rich_text'][number]
 export type NotionIcon = blocks.CalloutBlock['callout']['icon']
 
+/** @deprecated */
 export type BlockObjectResponse = Extract<
   Awaited<ReturnType<Client['blocks']['children']['list']>>['results'][number],
   { type: any }
