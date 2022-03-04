@@ -1,4 +1,4 @@
-import { BlockObjectResponse, blocks, ChildrenByBlockId } from '@notion-renderer/shared'
+import { blocks, ChildrenByBlockId } from '@notion-renderer/shared'
 import React, { createContext, FC, Fragment, useContext } from 'react'
 import { CustomableComponents } from '../types'
 import { DefaultChildPageIcon } from './icon/DefaultChildPageIcon'
