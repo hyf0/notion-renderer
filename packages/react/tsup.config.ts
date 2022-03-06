@@ -6,4 +6,5 @@ export const tsup: Options = {
   splitting: true,
   clean: true,
   external: ['react'],
+  noExternal: ['prismjs'],
 }

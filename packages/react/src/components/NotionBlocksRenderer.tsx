@@ -3,6 +3,7 @@ import React, { createContext, FC, Fragment, useContext } from 'react'
 import { CustomableComponents } from '../types'
 import { DefaultChildPageIcon } from './icon/DefaultChildPageIcon'
 import * as plainBlocks from './plain-blocks'
+import { CodeBlock } from './plain-blocks'
 import { BulletedList } from './plain-blocks/BulletedList'
 import { NumberedList } from './plain-blocks/NumberedList'
 
@@ -136,6 +137,9 @@ const BlocksRenderer: FC<{ blocks: blocks.Block[] }> = ({ blocks }) => {
           case 'synced_block': {
             const children = childrenByBlockId[block.id]
             return <BlocksRenderer blocks={children ?? []} />
+          }
+          case 'code': {
+            return <CodeBlock block={block} />
           }
           default: {
             return null

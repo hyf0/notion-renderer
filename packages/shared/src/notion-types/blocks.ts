@@ -55,6 +55,11 @@ export type NumberedListItemBlock = Extract<
   { type: 'numbered_list_item' }
 >
 
+export type CodeBlock = Extract<
+  Awaited<ReturnType<Client['blocks']['retrieve']>>,
+  { type: 'code' }
+>
+
 export type Block = Extract<
   Awaited<ReturnType<Client['blocks']['retrieve']>>,
   { type: any }
@@ -64,5 +69,3 @@ export type HeadingBlock =
   | HeadingBlockLevel1
   | HeadingBlockLevel2
   | HeadingBlockLevel3
-
-export const foo = 'foo'

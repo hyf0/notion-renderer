@@ -1,19 +1,30 @@
-import React from 'react'
-// @ts-ignore
-import SyntaxHighlighter from 'react-syntax-highlighter'
-// @ts-ignore
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import { blocks } from '@notion-renderer/shared'
+import { highlight, languages } from 'prismjs'
+import 'prismjs/components/prism-bash'
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-jsx'
+import 'prismjs/components/prism-markdown'
+import 'prismjs/components/prism-python'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/themes/prism.css'
 
-export const CodeBlock: React.FC<{ code: string; language: string }> = ({
-  code,
-  language = 'javascript',
-}) => {
-  const languageL = language.toLowerCase()
-  // const prismLanguage = languages[languageL] || languages.javascript
+import React from 'react'
+
+export const CodeBlock: React.FC<{ block: blocks.CodeBlock }> = ({ block }) => {
+  const language = block.code.language.toLowerCase()
+  const prismLanguage = languages[language] ?? languages.javascript!
+  const code = block.code.rich_text.map(t => t.plain_text).join('')
+  const html = highlight(code, prismLanguage, language)
 
   return (
-    <SyntaxHighlighter language={languageL} style={prism}>
-      {code}
-    </SyntaxHighlighter>
+    <div className="overflow-auto">
+      <pre className={`language-${language}`}>
+        <code
+          className={`language-${language}`}
+          dangerouslySetInnerHTML={{ __html: html }}
+        >
+        </code>
+      </pre>
+    </div>
   )
 }

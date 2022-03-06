@@ -13,7 +13,7 @@ export const ColumnListBlock: components.ColumnListBlock = ({ block }) => {
       {childrenBlock.map((block) => {
         const children = childrenByBlockId[block.id]!
         return (
-          <div key={block.id} className="flex-1 mr-8 last:mr-0">
+          <div key={block.id} className="flex-1 mr-[32px] last:mr-0 overflow-hidden">
             <BlocksRenderer blocks={children} />
           </div>
         )
