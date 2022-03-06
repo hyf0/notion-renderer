@@ -7,6 +7,7 @@ Renderer for notion using Official Notion API.
 # Features
 
 - Official Notion API
+- Atomic CSS
 
 ## Supported Blocks
 
