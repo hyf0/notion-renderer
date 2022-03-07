@@ -134,6 +134,15 @@ const BlocksRenderer: FC<{ blocks: blocks.Block[] }> = ({ blocks }) => {
               </a>
             )
           }
+          case 'link_preview': {
+            return (
+              <a href={block.link_preview.url} target="_blank">
+                <div className=" rounded-[3px] border p-[8px] hover:bg-slate-700/[.08] active:bg-slate-700/[.16]">
+                  {block.link_preview.url}
+                </div>
+              </a>
+            )
+          }
           case 'synced_block': {
             const children = childrenByBlockId[block.id]
             return <BlocksRenderer blocks={children ?? []} />

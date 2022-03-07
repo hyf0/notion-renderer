@@ -1,5 +1,7 @@
 import { RichTextItem } from '@notion-renderer/shared'
 import React, { FC } from 'react'
+import { DefaultChildPageIcon } from './icon/DefaultChildPageIcon'
+import { GithubIcon } from './icon/GithubIcon'
 
 export const RichTexts: FC<{ texts: RichTextItem[] }> = ({ texts }) => {
   return <div className="whitespace-pre-wrap">{texts.map((text, idx) => <RichText key={idx} text={text} />)}</div>
@@ -35,6 +37,42 @@ const RichText: FC<{ text: RichTextItem }> = ({ text }) => {
       )
     } else {
       return textEl
+    }
+  } else if (text.type === 'mention') {
+    switch (text.mention.type) {
+      case 'page': {
+        const pageId = text.mention.page.id
+        return (
+          <a href={`./${pageId}`}>
+            <div className="py-[3px] px-[2px] items-center cursor-pointer hover:bg-slate-700/[.07] flex">
+              <div className="h-[24px] w-[24px] flex items-center justify-center mr-[4px] text-[20px]">
+                <DefaultChildPageIcon />
+              </div>
+              <div className="border-b border-b-[rgba(55, 53, 47, 0.16)] font-[500] text-[16px] whitespace-nowrap overflow-hidden text-ellipsis">
+                {text.plain_text}
+              </div>
+            </div>
+          </a>
+        )
+      }
+      case 'link_preview': {
+        const url = text.mention.link_preview.url
+        const isGithubLink = url.includes('github.com')
+        return (
+          <a href={url}>
+            <div className="py-[3px] px-[2px] items-center cursor-pointer hover:bg-slate-700/[.07] flex">
+              {isGithubLink && (
+                <div className="h-[24px] w-[24px] flex items-center justify-center mr-[4px] text-[20px]">
+                  <GithubIcon />
+                </div>
+              )}
+              <div className="border-b border-b-[rgba(55, 53, 47, 0.16)] font-[500] text-[16px] whitespace-nowrap overflow-hidden text-ellipsis">
+                {url}
+              </div>
+            </div>
+          </a>
+        )
+      }
     }
   }
   return null

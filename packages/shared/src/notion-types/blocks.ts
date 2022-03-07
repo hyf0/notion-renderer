@@ -60,6 +60,11 @@ export type CodeBlock = Extract<
   { type: 'code' }
 >
 
+export type LinkPreviewBlock = Extract<
+  Awaited<ReturnType<Client['blocks']['retrieve']>>,
+  { type: 'link_preview' }
+>
+
 export type Block = Extract<
   Awaited<ReturnType<Client['blocks']['retrieve']>>,
   { type: any }
