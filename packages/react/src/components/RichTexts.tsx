@@ -144,7 +144,7 @@ const extractTextColor = (text: RichTextItem) => {
   return cls
 }
 
-const GITHUB_RE = /https:\/\/github\.com\/(.+)\/(.+)/
+const GITHUB_RE = /https:\/\/github\.com\/.+\/(.+)/
 const extractGithubProjectName = (url: string) => {
   const res = GITHUB_RE.exec(url)
   if (res) {
