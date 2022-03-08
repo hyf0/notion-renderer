@@ -57,15 +57,33 @@ const RichText: FC<{ text: RichTextItem }> = ({ text }) => {
       }
       case 'link_preview': {
         const url = text.mention.link_preview.url
-        const isGithubLink = url.includes('github.com')
+        const githubProjectName = extractGithubProjectName(url)
+        if (githubProjectName) {
+          return (
+            <a target="_blank" href={url}>
+              <div className="py-[3px] px-[2px] items-center cursor-pointer hover:bg-slate-700/[.07] inline-flex rounded-[3px] text-[16px]">
+                {
+                  <div className="flex items-center justify-center mr-[0.3em] text-[20px]">
+                    <GithubIcon />
+                  </div>
+                }
+                <div className="border-b border-b-[rgba(55, 53, 47, 0.16)] font-[500] leading-[24px] whitespace-nowrap overflow-hidden text-ellipsis">
+                  {githubProjectName}
+                </div>
+              </div>
+            </a>
+          )
+        }
         return (
           <a href={url}>
-            <div className="py-[3px] px-[2px] items-center cursor-pointer hover:bg-slate-700/[.07] flex">
-              {isGithubLink && (
+            <div className="py-[3px] px-[2px] items-center cursor-pointer hover:bg-slate-700/[.07] inline-flex">
+              {
+                /* {isGithubLink && (
                 <div className="h-[24px] w-[24px] flex items-center justify-center mr-[4px] text-[20px]">
                   <GithubIcon />
                 </div>
-              )}
+              )} */
+              }
               <div className="border-b border-b-[rgba(55, 53, 47, 0.16)] font-[500] text-[16px] whitespace-nowrap overflow-hidden text-ellipsis">
                 {url}
               </div>
@@ -124,4 +142,14 @@ const extractTextColor = (text: RichTextItem) => {
     ? 'bg-red-400'
     : ''
   return cls
+}
+
+const GITHUB_RE = /https:\/\/github\.com\/\w+\/(\w+)/
+const extractGithubProjectName = (url: string) => {
+  const res = GITHUB_RE.exec(url)
+  if (res) {
+    return res[1] ?? null
+  } else {
+    return null
+  }
 }
