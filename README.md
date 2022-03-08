@@ -65,3 +65,7 @@ Renderer for notion using Official Notion API.
 - @notion-renderer/vue(WIP)
 - @notion-renderer/client
 - @notion-renderer/shared
+
+# Related projects
+
+- [Quipu](https://github.com/iheyunfei/quipu)
