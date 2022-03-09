@@ -1,11 +1,15 @@
 import { blocks, ChildrenByBlockId } from '@notion-renderer/shared'
+import clsx from 'clsx'
 import React, { createContext, FC, Fragment, useContext } from 'react'
 import { CustomableComponents } from '../types'
 import { DefaultChildPageIcon } from './icon/DefaultChildPageIcon'
+import { TodoCheckedIcon } from './icon/TodoCheckedIcon'
+import { TodoUncheckedIcon } from './icon/TodoUncheckedIcon'
 import * as plainBlocks from './plain-blocks'
 import { CodeBlock } from './plain-blocks'
 import { BulletedList } from './plain-blocks/BulletedList'
 import { NumberedList } from './plain-blocks/NumberedList'
+import { RichTexts } from './RichTexts'
 
 const createDefaultRendererContextValue = () => {
   const components: CustomableComponents = {
@@ -149,6 +153,24 @@ const BlocksRenderer: FC<{ blocks: blocks.Block[] }> = ({ blocks }) => {
           }
           case 'code': {
             return <CodeBlock block={block} />
+          }
+          case 'to_do': {
+            const isChecked = block.to_do.checked
+            return (
+              <div className="flex items-center">
+                <div
+                  className={clsx(
+                    'w-[16px] h-[16px] mx-[8px] flex items-center justify-center',
+                    isChecked && 'bg-[#2EAADC]',
+                  )}
+                >
+                  {isChecked ? <TodoCheckedIcon /> : <TodoUncheckedIcon />}
+                </div>
+                <div className={clsx(isChecked && 'line-through text-[#37352fa6]')}>
+                  <RichTexts texts={block.to_do.rich_text} />
+                </div>
+              </div>
+            )
           }
           default: {
             return null

@@ -76,11 +76,13 @@ importers:
     specifiers:
       '@notion-renderer/shared': workspace:*
       '@types/prismjs': ^1.26.0
+      clsx: ^1.1.1
       prismjs: ^1.27.0
       react: ^17.0.2
       typescript: ^4.6.0-beta
     dependencies:
       '@notion-renderer/shared': link:../shared
+      clsx: 1.1.1
       prismjs: 1.27.0
     devDependencies:
       '@types/prismjs': 1.26.0
@@ -837,6 +839,11 @@ packages:
       slice-ansi: 5.0.0
       string-width: 5.1.0
     dev: true
+
+  /clsx/1.1.1:
+    resolution: {integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}

@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@notion-renderer/shared": "workspace:*",
+    "clsx": "^1.1.1",
     "prismjs": "^1.27.0"
   },
   "peerDependencies": {
