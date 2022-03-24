@@ -1,4 +1,4 @@
-import { blocks, ChildrenByBlockId } from '@notion-renderer/shared'
+import { blocks as blockTyps, ChildrenByBlockId } from '@notion-renderer/shared'
 import clsx from 'clsx'
 import React, { createContext, FC, Fragment, useContext } from 'react'
 import { CustomableComponents } from '../types'
@@ -9,6 +9,7 @@ import * as plainBlocks from './plain-blocks'
 import { CodeBlock } from './plain-blocks'
 import { BulletedList } from './plain-blocks/BulletedList'
 import { NumberedList } from './plain-blocks/NumberedList'
+import { TableOfContentsBlock } from './plain-blocks/TableOfContents'
 import { RichTexts } from './RichTexts'
 
 const createDefaultRendererContextValue = () => {
@@ -26,6 +27,7 @@ const createDefaultRendererContextValue = () => {
     childrenByBlockId: {} as ChildrenByBlockId,
     darkMode: false,
     BlocksRenderer,
+    rootBlocks: [] as blockTyps.Block[],
   }
 }
 
@@ -34,7 +36,7 @@ export const rendererContext = createContext(
 )
 
 export const NotionBlocksRenderer: FC<{
-  blocks: blocks.Block[]
+  blocks: blockTyps.Block[]
   components?: Partial<CustomableComponents>
   childrenByBlockId: ChildrenByBlockId
   darkMode?: boolean
@@ -43,6 +45,7 @@ export const NotionBlocksRenderer: FC<{
   Object.assign(defaultRenderContextValue.components, components)
   defaultRenderContextValue.childrenByBlockId = childrenByBlockId
   defaultRenderContextValue.darkMode = darkMode
+  defaultRenderContextValue.rootBlocks = blocks
   return (
     <rendererContext.Provider value={defaultRenderContextValue}>
       <BlocksRenderer blocks={blocks} />
@@ -50,12 +53,12 @@ export const NotionBlocksRenderer: FC<{
   )
 }
 
-const BlocksRenderer: FC<{ blocks: blocks.Block[] }> = ({ blocks }) => {
+const BlocksRenderer: FC<{ blocks: blockTyps.Block[] }> = ({ blocks }) => {
   const { components, childrenByBlockId } = useContext(rendererContext)
   type Formated = (
-    | Exclude<blocks.Block, { type: 'bulleted_list_item' } | { type: 'numbered_list_item' }>
-    | blocks.BulletedListItemBlock[]
-    | blocks.NumberedListItemBlock[]
+    | Exclude<blockTyps.Block, { type: 'bulleted_list_item' } | { type: 'numbered_list_item' }>
+    | blockTyps.BulletedListItemBlock[]
+    | blockTyps.NumberedListItemBlock[]
   )[]
   const formated: Formated = blocks.reduce<Formated>((acc, cur) => {
     if (cur.type !== 'bulleted_list_item' && cur.type !== 'numbered_list_item') {
@@ -172,16 +175,19 @@ const BlocksRenderer: FC<{ blocks: blocks.Block[] }> = ({ blocks }) => {
               </div>
             )
           }
+          case 'table_of_contents': {
+            return <TableOfContentsBlock block={block} />
+          }
           default: {
             return null
           }
         }
       } else {
         if (block[0]!.type == 'bulleted_list_item') {
-          block = block as blocks.BulletedListItemBlock[]
+          block = block as blockTyps.BulletedListItemBlock[]
           return <BulletedList items={block} />
         } else {
-          block = block as blocks.NumberedListItemBlock[]
+          block = block as blockTyps.NumberedListItemBlock[]
           return <NumberedList items={block} />
         }
       }

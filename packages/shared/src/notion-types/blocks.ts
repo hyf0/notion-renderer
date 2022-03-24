@@ -65,6 +65,11 @@ export type LinkPreviewBlock = Extract<
   { type: 'link_preview' }
 >
 
+export type TableOfContentsBlock = Extract<
+  Awaited<ReturnType<Client['blocks']['retrieve']>>,
+  { type: 'table_of_contents' }
+>
+
 export type Block = Extract<
   Awaited<ReturnType<Client['blocks']['retrieve']>>,
   { type: any }

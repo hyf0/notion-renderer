@@ -19,3 +19,7 @@ export type QuoteBlock = FC<{ block: blockTypes.QuoteBlock }>
 export type ToggleBlock = FC<{ block: blockTypes.ToggleBlock }>
 
 export type ImageBlock = FC<{ block: blockTypes.ImageBlock }>
+
+export type TableOfContentsBlock = FC<{
+  block: blockTypes.TableOfContentsBlock
+}>
