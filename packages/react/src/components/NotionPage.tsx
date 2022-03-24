@@ -25,10 +25,9 @@ export const NotionPage: FC<
 > = (
   { blocks, childrenByBlockId, fullWidth = false, cover, icon, title },
 ) => {
-  console.log('root blocks', blocks)
   return (
     <>
-      {cover && <PageCover cover={cover} />}
+      {cover ? <PageCover cover={cover} /> : <div className="h-[96px]" />}
       <div
         className={`px-8 flex flex-col items-center`}
         style={{
