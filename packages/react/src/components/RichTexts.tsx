@@ -1,10 +1,19 @@
 import { RichTextItem } from '@notion-renderer/shared'
+import clsx from 'clsx'
 import React, { FC } from 'react'
 import { DefaultChildPageIcon } from './icon/DefaultChildPageIcon'
 import { GithubIcon } from './icon/GithubIcon'
 
-export const RichTexts: FC<{ texts: RichTextItem[] }> = ({ texts }) => {
-  return <div className="whitespace-pre-wrap">{texts.map((text, idx) => <RichText key={idx} text={text} />)}</div>
+export const RichTexts: FC<{ texts: RichTextItem[]; className?: string }> = ({ texts, className }) => {
+  const isEmpty = texts.length === 0
+  return (
+    <div
+      placeholder=" "
+      className={clsx('whitespace-pre-wrap', isEmpty && 'after:content-[attr(placeholder)]', className)}
+    >
+      {texts.map((text, idx) => <RichText key={idx} text={text} />)}
+    </div>
+  )
 }
 
 const RichText: FC<{ text: RichTextItem }> = ({ text }) => {
@@ -14,17 +23,15 @@ const RichText: FC<{ text: RichTextItem }> = ({ text }) => {
     const anno = text.annotations
     const textEl = (
       <span
-        className={[
+        className={clsx(
           colorCls,
           linkCls,
           anno.bold && 'font-bold',
           anno.italic && 'italic',
           anno.underline && 'underline',
           anno.code
-          && 'text-[#EB5757] bg-[rgba(135,131,120,0.15)] rounded-[3px] text-sm py-0.5 px-1',
-        ]
-          .filter(Boolean)
-          .join(' ')}
+            && 'text-[#EB5757] bg-[rgba(135,131,120,0.15)] rounded-[3px] text-sm py-0.5 px-1',
+        )}
       >
         {text.text.content}
       </span>

@@ -12,13 +12,16 @@ const notion = new EnhancedNotionClient(
   }),
 )
 
+const cache = new Map()
+
 export const { getServerSideProps } = defGetServerSideProps()(async (ctx) => {
   ctx.res.setHeader(
     'Cache-Control',
     'public, s-maxage=10, stale-while-revalidate=59',
   )
   const pageId = ctx.params?.notionPageId ?? ''
-  const page = await notion.getPage(pageId as string)
+  const page = cache.has(pageId) ? cache.get(pageId)! : (await notion.getPage(pageId as string))
+  cache.set(pageId, page)
 
   return {
     props: {
