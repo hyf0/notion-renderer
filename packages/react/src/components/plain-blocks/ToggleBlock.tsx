@@ -21,7 +21,7 @@ export const ToggleBlock: components.ToggleBlock = ({ block }) => {
           <ToggleSignIcon />
         </div>
       </div>
-      <div>
+      <div className="flex-1">
         <RichTexts texts={block.toggle.rich_text} />
         {isExpanded && <BlocksRenderer blocks={children} />}
       </div>
