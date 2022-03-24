@@ -30,7 +30,7 @@ Renderer for notion using Official Notion API.
 | Equation (block)         | ❌        | `equation`             |
 | Equation (inline)        | ❌        | `text`                 |
 | Todos (checkboxes)       | ✅        | `to_do`                |
-| Table Of Contents        | ❌        | `table_of_contents`    |
+| Table Of Contents        | ✅        | `table_of_contents`    |
 | Divider                  | ✅        | `divider`              |
 | Column                   | ✅        | `column`               |
 | Column List              | ⚠️        | `column_list`          |
