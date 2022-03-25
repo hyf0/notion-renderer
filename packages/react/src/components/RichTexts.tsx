@@ -1,6 +1,7 @@
 import { RichTextItem } from '@notion-renderer/shared'
 import clsx from 'clsx'
 import React, { FC } from 'react'
+import { NotionTextBgColor, NotionTextColor } from '../constants'
 import { DefaultChildPageIcon } from './icon/DefaultChildPageIcon'
 import { GithubIcon } from './icon/GithubIcon'
 
@@ -112,43 +113,68 @@ const extractLinkCls = (text: RichTextItem) => {
 
 const extractTextColor = (text: RichTextItem) => {
   const color = text.annotations.color
-
-  const cls = color === 'default'
-    ? ''
-    : color === 'gray'
-    ? 'text-gray-400'
-    : color === 'orange'
-    ? 'text-orange-400'
-    : color === 'yellow'
-    ? 'text-yellow-400'
-    : color === 'green'
-    ? 'text-green-400'
-    : color === 'blue'
-    ? 'text-blue-400'
-    : color === 'purple'
-    ? 'text-purple-400'
-    : color === 'pink'
-    ? 'text-pink-400'
-    : color === 'red'
-    ? 'text-red-400'
-    : color === 'gray_background'
-    ? 'bg-gray-400'
-    : color === 'orange_background'
-    ? 'bg-orange-400'
-    : color === 'yellow_background'
-    ? 'bg-yellow-400'
-    : color === 'green_background'
-    ? 'bg-green-400'
-    : color === 'blue_background'
-    ? 'bg-blue-400'
-    : color === 'purple_background'
-    ? 'bg-purple-400'
-    : color === 'pink_background'
-    ? 'bg-pink-400'
-    : color === 'red_background'
-    ? 'bg-red-400'
-    : ''
-  return cls
+  switch (color) {
+    case 'default': {
+      return ''
+    }
+    case 'gray': {
+      return NotionTextColor.Gray
+    }
+    case 'orange': {
+      return NotionTextColor.Orange
+    }
+    case 'yellow': {
+      return NotionTextColor.Yellow
+    }
+    case 'green': {
+      return NotionTextColor.Green
+    }
+    case 'blue': {
+      return NotionTextColor.Blue
+    }
+    case 'purple': {
+      return NotionTextColor.Purple
+    }
+    case 'pink': {
+      return NotionTextColor.Pink
+    }
+    case 'red': {
+      return NotionTextColor.Red
+    }
+    case 'brown': {
+      return NotionTextColor.Brown
+    }
+    case 'gray_background': {
+      return NotionTextBgColor.Gray
+    }
+    case 'orange_background': {
+      return NotionTextBgColor.Orange
+    }
+    case 'yellow_background': {
+      return NotionTextBgColor.Yellow
+    }
+    case 'green_background': {
+      return NotionTextBgColor.Green
+    }
+    case 'blue_background': {
+      return NotionTextBgColor.Blue
+    }
+    case 'purple_background': {
+      return NotionTextBgColor.Purple
+    }
+    case 'pink_background': {
+      return NotionTextBgColor.Pink
+    }
+    case 'red_background': {
+      return NotionTextBgColor.Red
+    }
+    case 'brown_background': {
+      return NotionTextBgColor.Brown
+    }
+    default: {
+      const _check: never = color
+    }
+  }
 }
 
 const GITHUB_RE = /https:\/\/github\.com\/.+\/(.+)/
