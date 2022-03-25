@@ -169,7 +169,7 @@ const BlocksRenderer: FC<{ blocks: blockTyps.Block[] }> = ({ blocks }) => {
                 >
                   {isChecked ? <TodoCheckedIcon /> : <TodoUncheckedIcon />}
                 </div>
-                <div className={clsx(isChecked && 'line-through text-[#37352fa6]')}>
+                <div className={clsx(isChecked && 'line-through text-[#37352fa6]', 'py-[3px] px-[2px]')}>
                   <RichTexts texts={block.to_do.rich_text} />
                 </div>
               </div>

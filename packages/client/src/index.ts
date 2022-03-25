@@ -60,7 +60,6 @@ export class EnhancedNotionClient {
                 runningPromises.indexOf(fetchAllBlocksPromise),
                 1,
               )
-              console.log('runningPromises', runningPromises.length)
             },
           )
           runningPromises.push(fetchAllBlocksPromise)

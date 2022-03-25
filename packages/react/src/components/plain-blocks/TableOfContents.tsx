@@ -35,7 +35,7 @@ export const TableOfContentsBlock: components.TableOfContentsBlock = ({ block })
   }, [childrenByBlockId, rootBlocks])
   return (
     <>
-      {titles.map(heading => {
+      {titles.map((heading, idx) => {
         switch (heading.type) {
           case 'heading_1': {
             return <TOCLink key={heading.id} id={heading.id} texts={heading.heading_1.rich_text} />
