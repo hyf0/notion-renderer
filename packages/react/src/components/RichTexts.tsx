@@ -52,7 +52,7 @@ const RichText: FC<{ text: RichTextItem }> = ({ text }) => {
         const pageId = text.mention.page.id
         return (
           <a href={`./${pageId}`}>
-            <div className="py-[3px] px-[2px] items-center cursor-pointer hover:bg-slate-700/[.07] flex">
+            <div className="py-[3px] px-[2px] items-center cursor-pointer hover:bg-slate-700/[.07] inline-flex">
               <div className="h-[24px] w-[24px] flex items-center justify-center mr-[4px] text-[20px]">
                 <DefaultChildPageIcon />
               </div>
